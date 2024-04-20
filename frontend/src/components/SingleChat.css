@@ -1,0 +1,10 @@
+.type_ani span{
+  color: rgb(34, 255, 0);
+}.type_ani{
+  display: flex;
+  justify-content: center;
+}
+.sen_btn_icon{
+  position: absolute;
+  margin-top: -20px !important;
+}

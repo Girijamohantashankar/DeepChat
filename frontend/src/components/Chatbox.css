@@ -1,0 +1,22 @@
+.chat_bg{
+    background: #fff !important;
+}
+.box_img{
+    background-image: url("https://png.pngtree.com/thumb_back/fw800/background/20231231/pngtree-sleek-and-sophisticated-futuristic-blue-background-with-polka-dot-texture-image_13917961.png");
+    /* background-repeat: no-repeat; */
+ 
+}
+.chat_box_s{
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px !important;
+}
+.profile_left{
+    display: flex;
+    align-items: center;
+}
+.profile_name{
+  /* position: absolute; */
+    margin-left: 40px !important;
+   
+}
+
+
