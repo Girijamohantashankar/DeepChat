@@ -16,7 +16,7 @@ import { ChatState } from "../Context/ChatProvider";
 import { FaPaperPlane } from "react-icons/fa";
 import { getSender, getSenderFull } from "../config/ChatLogics";
 
-
+let typingTimeoutRef = null;
 const ENDPOINT =
   process.env.NODE_ENV === "production" ? "" : "http://localhost:5000";
 let socket, selectedChatCompare;
@@ -135,19 +135,23 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
 
   const typingHandler = (e) => {
     setNewMessage(e.target.value);
-
+  
     if (!socketConnected) return;
-
-    let lastTypingTime = new Date().getTime();
-    var timerLength = 3000;
-    setTimeout(() => {
-      var timeNow = new Date().getTime();
-      var timeDiff = timeNow - lastTypingTime;
-      if (timeDiff >= timerLength) {
-        socket.emit("stop typing", selectedChat._id);
-      }
-    }, timerLength);
+  
+    const typingTimeout = 3000; // 3000 milliseconds
+  
+    // Emit "typing" event to the server
+    socket.emit("typing", selectedChat._id);
+  
+    // Clear previous timeout (if any)
+    clearTimeout(typingTimeoutRef);
+  
+    // Set new timeout to emit "stop typing" event
+    typingTimeoutRef = setTimeout(() => {
+      socket.emit("stop typing", selectedChat._id);
+    }, typingTimeout);
   };
+  
 
   return (
     <>
